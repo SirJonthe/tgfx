@@ -2,7 +2,7 @@
 /// @author github.com/SirJonthe
 /// @date 2023
 /// @copyright Public domain.
-/// @license CC0
+/// @license CC0 1.0
 
 #ifndef CC0_TGFX_H_INCLUDED__
 #define CC0_TGFX_H_INCLUDED__
@@ -64,17 +64,17 @@ namespace cc0
 		/// @param width The width, in pixels, of the image.
 		/// @param height The height, in pixels, of the image.
 		/// @param region The region of the image to draw.
-		/// @param decoder A decoder function used to interpret the incoming pixel format into an RGB triplet. The decoder takes the incoming pixel pointer and the currently rendered pixel coordinate, and returns the RGB triplet.
+		/// @param decoder A decoder function used to interpret the incoming pixel format into an RGB triplet. The decoder takes the incoming pixel pointer, the width and height of the image, and the currently rendered pixel coordinate, and returns the RGB triplet.
 		/// @param width_scale The number of characters in width that make up a pixel. Used to scale pixels properly in terminals that use tall characters.
-		void TerminalBlit(const void *pixels, uint32_t width, uint32_t height, Region region, Pixel (*decoder)(const void*, Coord), uint32_t width_scale = 2);
+		void TerminalBlit(const void *pixels, uint32_t width, uint32_t height, Region region, Pixel (*decoder)(const void*, uint32_t, uint32_t, Coord), uint32_t width_scale = 2);
 
 		/// @brief Blits an image with specified width, and height, and displays it in the terminal window. 
 		/// @param pixels A pointer to the pixels of the image.
 		/// @param width The width, in pixels, of the image.
 		/// @param height The height, in pixels, of the image.
-		/// @param decoder A decoder function used to interpret the incoming pixel format into an RGB triplet. The decoder takes the incoming pixel pointer and the currently rendered pixel coordinate, and returns the RGB triplet.
+		/// @param decoder A decoder function used to interpret the incoming pixel format into an RGB triplet. The decoder takes the incoming pixel pointer, the width and height of the image, and the currently rendered pixel coordinate, and returns the RGB triplet.
 		/// @param width_scale The number of characters in width that make up a pixel. Used to scale pixels properly in terminals that use tall characters.
-		void TerminalBlit(const void *pixels, uint32_t width, uint32_t height, Pixel (*decoder)(const void*, Coord), uint32_t width_scale = 2);
+		void TerminalBlit(const void *pixels, uint32_t width, uint32_t height, Pixel (*decoder)(const void*, uint32_t, uint32_t, Coord), uint32_t width_scale = 2);
 
 		/// @brief A small example showing an animated character in the terminal window. 
 		void RunExample( void );

@@ -2,7 +2,7 @@
 /// @author github.com/SirJonthe
 /// @date 2023
 /// @copyright Public domain.
-/// @license CC0
+/// @license CC0 1.0
 
 #include <iostream>
 #include <thread>
@@ -71,14 +71,14 @@ void cc0::tgfx::TerminalBlit(const uint8_t *pixels, uint32_t width, uint32_t hei
 	cc0::tgfx::TerminalBlit(pixels, width, height, Region{ 0, 0, width, height }, format);
 }
 
-void cc0::tgfx::TerminalBlit(const void *pixels, uint32_t width, uint32_t height, Region region, Pixel (*decoder)(const void*, cc0::tgfx::Coord), uint32_t width_scale)
+void cc0::tgfx::TerminalBlit(const void *pixels, uint32_t width, uint32_t height, Region region, Pixel (*decoder)(const void*, uint32_t, uint32_t, cc0::tgfx::Coord), uint32_t width_scale)
 {
 	cc0::tgfx::Pixel rgb;
 	ResetCursor();
 	char color_code[] = "\e[48;2;000;000;000m ";
 	for (uint32_t y = region.y_offset; y < region.y_offset + region.height; ++y) {
 		for (uint32_t x = region.x_offset * width_scale; x < (region.x_offset + region.width) * width_scale; ++x) {
-			rgb = decoder(pixels, Coord{ x / width_scale, y });
+			rgb = decoder(pixels, width, height, Coord{ x / width_scale, y });
 			EncodeColor(color_code, rgb.r, rgb.g, rgb.b);
 			std::cout << color_code;
 		}
@@ -87,7 +87,7 @@ void cc0::tgfx::TerminalBlit(const void *pixels, uint32_t width, uint32_t height
 	Refresh();
 }
 
-void cc0::tgfx::TerminalBlit(const void *pixels, uint32_t width, uint32_t height, Pixel (*decoder)(const void*, cc0::tgfx::Coord), uint32_t width_scale)
+void cc0::tgfx::TerminalBlit(const void *pixels, uint32_t width, uint32_t height, Pixel (*decoder)(const void*, uint32_t, uint32_t, cc0::tgfx::Coord), uint32_t width_scale)
 {
 	cc0::tgfx::TerminalBlit(pixels, width, height, Region{ 0, 0, width, height }, decoder, width_scale);
 }
