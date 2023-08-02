@@ -51,7 +51,7 @@ static void Refresh( void )
 	std::cout.flush();
 }
 
-void cc0::tgfx::TerminalBlit(const uint8_t *pixels, uint32_t width, uint32_t height, Region region, cc0::tgfx::PixelFormat format)
+void cc0::tgfx::TerminalBlit(const uint8_t *pixels, uint32_t width, uint32_t height, cc0::tgfx::Region region, cc0::tgfx::PixelFormat format)
 {
 	ResetCursor();
 	char color_code[] = "\e[48;2;000;000;000m ";
@@ -68,10 +68,10 @@ void cc0::tgfx::TerminalBlit(const uint8_t *pixels, uint32_t width, uint32_t hei
 
 void cc0::tgfx::TerminalBlit(const uint8_t *pixels, uint32_t width, uint32_t height, cc0::tgfx::PixelFormat format)
 {
-	cc0::tgfx::TerminalBlit(pixels, width, height, Region{ 0, 0, width, height }, format);
+	cc0::tgfx::TerminalBlit(pixels, width, height, cc0::tgfx::Region{ 0, 0, width, height }, format);
 }
 
-void cc0::tgfx::TerminalBlit(const void *pixels, uint32_t width, uint32_t height, Region region, Pixel (*decoder)(const void*, uint32_t, uint32_t, cc0::tgfx::Coord), uint32_t width_scale)
+void cc0::tgfx::TerminalBlit(const void *pixels, uint32_t width, uint32_t height, cc0::tgfx::Region region, Pixel (*decoder)(const void*, uint32_t, uint32_t, cc0::tgfx::Coord), uint32_t width_scale)
 {
 	cc0::tgfx::Pixel rgb;
 	ResetCursor();
@@ -89,7 +89,7 @@ void cc0::tgfx::TerminalBlit(const void *pixels, uint32_t width, uint32_t height
 
 void cc0::tgfx::TerminalBlit(const void *pixels, uint32_t width, uint32_t height, Pixel (*decoder)(const void*, uint32_t, uint32_t, cc0::tgfx::Coord), uint32_t width_scale)
 {
-	cc0::tgfx::TerminalBlit(pixels, width, height, Region{ 0, 0, width, height }, decoder, width_scale);
+	cc0::tgfx::TerminalBlit(pixels, width, height, cc0::tgfx::Region{ 0, 0, width, height }, decoder, width_scale);
 }
 
 static constexpr uint8_t flirp_rgb[] = {
