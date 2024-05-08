@@ -48,6 +48,7 @@ static void EncodeXY(char *xy_code, uint32_t x, uint32_t y)
 
 static void Refresh( void )
 {
+	std::cout << "\e[0m" << std::endl;
 	std::cout.flush();
 }
 
