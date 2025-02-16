@@ -1,4 +1,5 @@
-/// @file
+/// @file tgfx.cpp
+/// @brief Contains a minimalist library that can be used to display an image in a Unix terminal.
 /// @author github.com/SirJonthe
 /// @date 2023
 /// @copyright Public domain.
